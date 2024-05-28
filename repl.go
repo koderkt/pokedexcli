@@ -65,13 +65,13 @@ type config struct {
 }
 
 type location struct {
-	name string `json:"name"`
-	url  string `json:"url"`
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }
 
 type locationApiResponse struct {
 	Count    int        `json:"count"`
 	Next     string     `json:"next"`
 	Previous string     `json:"previous"`
-	results  []location `json:"results"`
+	Results  []location `json:"results"`
 }

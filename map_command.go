@@ -32,8 +32,8 @@ func cmdMap() error {
 	if err != nil {
 		return err
 	}
-	for _, location := range locRes.results {
-		fmt.Printf("Location Name: %s, URL: %s\n", location.name, location.url)
+	for _, location := range locRes.Results {
+		fmt.Printf("Location Name: %s, URL: %s\n", location.Name, location.URL)
 	}
 
 	// fmt.Println()
