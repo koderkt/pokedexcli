@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func repl() {
+func repl(config *Config) {
 	reader := bufio.NewScanner(os.Stdin)
 
 	for {
@@ -17,7 +17,7 @@ func repl() {
 		commandName := cleanUp(input)
 		cmd, exists := getCommands()[commandName[0]]
 		if exists {
-			err := cmd.callback()
+			err := cmd.callback(config)
 			if err != nil {
 				fmt.Println("Error: ", err)
 			}
@@ -31,7 +31,7 @@ func repl() {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*Config) error
 }
 
 func cleanUp(input string) []string {
@@ -56,22 +56,10 @@ func getCommands() map[string]cliCommand {
 			description: "Displays the names of 20 location areas in the Pokemon world",
 			callback:    cmdMap,
 		},
+		"mapb": {
+			name:        "mapb",
+			description: "Displays the names of previous 20 location areas in the Pokemon world",
+			callback:    cmdMapb,
+		},
 	}
-}
-
-type config struct {
-	next     string
-	previous string
-}
-
-type location struct {
-	Name string `json:"name"`
-	URL  string `json:"url"`
-}
-
-type locationApiResponse struct {
-	Count    int        `json:"count"`
-	Next     string     `json:"next"`
-	Previous string     `json:"previous"`
-	Results  []location `json:"results"`
 }
